@@ -13,7 +13,7 @@ import { NewTrainingComponent } from './training/new-training/new-training.compo
 import { PastTrainingsComponent } from './training/past-trainings/past-trainings.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { FlexLayoutModule, LayoutStyleBuilder, MediaMarshaller, StylesheetMap, StyleUtils } from '@angular/flex-layout';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { MatchMedia } from '@angular/flex-layout/core/typings/match-media/match-media';
 
 @NgModule({
@@ -33,7 +33,8 @@ import { FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     MaterialModule,
     FlexLayoutModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     StyleUtils,
