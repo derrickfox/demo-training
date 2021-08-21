@@ -14,7 +14,11 @@ import { PastTrainingsComponent } from './training/past-trainings/past-trainings
 import { WelcomeComponent } from './welcome/welcome.component';
 import { FlexLayoutModule, LayoutStyleBuilder, MediaMarshaller, StylesheetMap, StyleUtils } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-// import { MatchMedia } from '@angular/flex-layout/core/typings/match-media/match-media';
+import { HeaderComponent } from './navigation/header/header.component';
+import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
+import { StopTrainingComponent } from './training/current-training/stop-training.component';
+import { AuthService } from './auth/auth.service';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +29,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CurrentTrainingComponent,
     NewTrainingComponent,
     PastTrainingsComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    HeaderComponent,
+    SidenavListComponent,
+    StopTrainingComponent
   ],
   imports: [
     BrowserModule,
@@ -40,8 +47,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     StyleUtils,
     StylesheetMap,
     LayoutStyleBuilder,
-    MediaMarshaller
+    MediaMarshaller,
+    AuthService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [StopTrainingComponent]
 })
 export class AppModule { }
