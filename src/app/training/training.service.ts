@@ -17,13 +17,13 @@ export class TrainingService {
     }
 
     public startExercise(selectedId: string) {
-        console.log('start exercise!!')
+        console.log('start!')
         this.runningExercise = this.availableExercises.find(ex => ex.id === selectedId);
-        console.log('this.runningExercise', this.runningExercise)
         this.exerciseChanged.next({ ...this.runningExercise })
     }
 
     public completeExercise(): void {
+        console.log('completed!')
         this.exercises.push({
             ...this.runningExercise,
             date: new Date,
@@ -31,6 +31,7 @@ export class TrainingService {
         });
         this.runningExercise = null;
         this.exerciseChanged.next(null);
+        console.log('exercises!!', this.exercises)
     }
 
     public cancelExercise(progress: number): void {
@@ -47,5 +48,9 @@ export class TrainingService {
 
     public getRunningExercise() {
         return { ...this.runningExercise };
+    }
+
+    public getCompletedOrCancelledExercises() {
+        return this.exercises.slice();
     }
 }
