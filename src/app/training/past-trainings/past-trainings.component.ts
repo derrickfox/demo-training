@@ -20,6 +20,10 @@ export class PastTrainingsComponent implements OnInit, AfterViewInit {
     this.dataSource.data = this.trainingService.getCompletedOrCancelledExercises();
   }
 
+  public doFilter(filterValue: string): void {
+    this.dataSource.filter = filterValue.trim().toLocaleLowerCase();
+  }
+
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
   }
