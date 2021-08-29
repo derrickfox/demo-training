@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { MatFormFieldModule, MatInputModule, MatNativeDateModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatNativeDateModule, MatSortModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -31,7 +31,8 @@ import { MatTableModule } from '@angular/material/table';
         MatSelectModule,
         MatProgressSpinnerModule,
         MatDialogModule,
-        MatTableModule
+        MatTableModule,
+        MatSortModule
     ],
     exports: [
         MatButtonModule,
@@ -49,7 +50,8 @@ import { MatTableModule } from '@angular/material/table';
         MatSelectModule,
         MatProgressSpinnerModule,
         MatDialogModule,
-        MatTableModule
+        MatTableModule,
+        MatSortModule
     ],
 })
 
