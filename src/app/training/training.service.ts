@@ -1,29 +1,47 @@
+import { Injectable } from "@angular/core";
+import { AngularFirestore } from "angularfire2/firestore";
 import { Subject } from "rxjs";
+import { map } from "rxjs/operators";
 import { Exercise } from "./exercise.model";
 
+@Injectable()
 export class TrainingService {
     public exerciseChanged = new Subject<Exercise>();
-    private availableExercises: Exercise[] = [
-        { id: 'crunches', name: 'Crunches', duration: 1, calories: 3 },
-        { id: 'touch-toes', name: 'Touch Toes', duration: 2, calories: 12 },
-        { id: 'side-lunges', name: 'Side Lunges', duration: 3, calories: 3 },
-        { id: 'burpees', name: 'Burpees', duration: 4, calories: 8 }
-    ];
+    public exercisesChanged = new Subject<Exercise[]>();
+    private availableExercises: Exercise[] = [];
     private runningExercise: Exercise;
     private exercises: Exercise[] = [];
 
-    public getAvailableExercises(): Exercise[] {
-        return this.availableExercises.slice();
+    constructor(private db: AngularFirestore) {}
+    
+    public fetchAvailableExercises(): any {
+        this.db
+		.collection('availableExercies')
+		.snapshotChanges()
+		.pipe(
+			map(docArray => {
+				return docArray.map(doc => {
+					return {
+						id: doc.payload.doc.id,
+						name: doc.payload.doc.data()['name'],
+						duration: doc.payload.doc.data()['duration'],
+						calories: doc.payload.doc.data()['calories']
+					}
+				})
+			})
+		)
+		.subscribe((exercises: Exercise[]) => {
+            this.availableExercises = exercises;
+            this.exercisesChanged.next([...this.availableExercises]);
+        });
     }
 
     public startExercise(selectedId: string) {
-        console.log('start!')
         this.runningExercise = this.availableExercises.find(ex => ex.id === selectedId);
         this.exerciseChanged.next({ ...this.runningExercise })
     }
 
     public completeExercise(): void {
-        console.log('completed!')
         this.exercises.push({
             ...this.runningExercise,
             date: new Date,
@@ -31,7 +49,6 @@ export class TrainingService {
         });
         this.runningExercise = null;
         this.exerciseChanged.next(null);
-        console.log('exercises!!', this.exercises)
     }
 
     public cancelExercise(progress: number): void {
