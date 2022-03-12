@@ -5,8 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
-import { SignupComponent } from './auth/signup/signup.component';
-import { LoginComponent } from './auth/login/login.component';
 import { TrainingComponent } from './training/training.component';
 import { CurrentTrainingComponent } from './training/current-training/current-training.component';
 import { NewTrainingComponent } from './training/new-training/new-training.component';
@@ -24,21 +22,16 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { environment } from 'src/environments/environment';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { UiService } from './shared/ui.service';
+import { AuthModule } from './auth/auth.module';
+import { TrainingModule } from './training/training.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    SignupComponent,
-    LoginComponent,
-    TrainingComponent,
-    CurrentTrainingComponent,
-    NewTrainingComponent,
-    PastTrainingsComponent,
     WelcomeComponent,
     HeaderComponent,
-    SidenavListComponent,
-    StopTrainingComponent
+    SidenavListComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +43,9 @@ import { UiService } from './shared/ui.service';
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AuthModule,
+    TrainingModule
   ],
   providers: [
     StyleUtils,
@@ -61,7 +56,6 @@ import { UiService } from './shared/ui.service';
     TrainingService,
     UiService
   ],
-  bootstrap: [AppComponent],
-  entryComponents: [StopTrainingComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
