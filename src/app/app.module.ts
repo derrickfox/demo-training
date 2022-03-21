@@ -16,7 +16,8 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { environment } from 'src/environments/environment';
 import { UiService } from './shared/ui.service';
 import { AuthModule } from './auth/auth.module';
-import { SharedModule } from './shared/shared.module';
+import { StoreModule } from '@ngrx/store';
+import { reducers } from './app.reducer';
 
 
 @NgModule({
@@ -32,12 +33,10 @@ import { SharedModule } from './shared/shared.module';
     MaterialModule,
     AppRoutingModule,
     FlexLayoutModule,
-    // FormsModule,
-    // ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    AuthModule
-    // SharedModule
+    AuthModule,
+    StoreModule.forRoot(reducers)
   ],
   providers: [
     StyleUtils,
