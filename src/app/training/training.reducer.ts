@@ -20,6 +20,7 @@ const initialState: TrainingState = {
 };
 
 export function trainingReducer(state = initialState, action: TrainingActions) {
+    console.log('training reducer -> action', action);
     switch (action.type) {
         case SET_AVAILABLE_TRAININGS:
             return {

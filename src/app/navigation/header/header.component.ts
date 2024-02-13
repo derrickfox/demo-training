@@ -19,6 +19,9 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.isAuth$ = this.store.select(fromRoot.getIsAuth);
+    this.store.select(fromRoot.getIsAuth).subscribe((isAuth) => {
+      console.log('header component -> isAuth$', isAuth);
+    })
   }
 
   public onToggleSidenav(): void {

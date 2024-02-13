@@ -15,7 +15,6 @@ export class TrainingService {
     public exercisesChanged = new Subject<Exercise[]>();
     public finishedExercisesChanged = new Subject<Exercise[]>();
     private fbSubs: Subscription[] = [];
-    private availableExercises: Exercise[] = [];
     private runningExercise: Exercise;
 
     constructor(
@@ -44,7 +43,7 @@ export class TrainingService {
 		.subscribe((exercises: Exercise[]) => {
             this.store.dispatch(new UI.StopLoading());
             this.store.dispatch(new Training.SetAvailableTrainings(exercises));
-        }, error => {
+        }, () => {
             this.store.dispatch(new UI.StopLoading());
             this.uiService.showSnackbar('Fetching exercises failed, please try again later.', null, 3000);
             this.exercisesChanged.next(null);
@@ -56,7 +55,7 @@ export class TrainingService {
     }
 
     public completeExercise(): void {
-        this.store.select(fromTraining.getActiveTraining).pipe(take(1)).subscribe(ex => {
+        this.store.select(fromTraining.getActiveTraining).pipe(take(1)).subscribe(() => {
             this.addDataToDatabase({
                 ...this.runningExercise,
                 date: new Date,
@@ -80,6 +79,7 @@ export class TrainingService {
     }
 
     public fetchCompletedOrCancelledExercises() {
+        console.log('training service -> fetchCompletedOrCancelledExercises()')
         this.fbSubs.push(this.db
             .collection('finishedExercises')
             .valueChanges()

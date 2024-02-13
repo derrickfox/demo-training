@@ -21,6 +21,7 @@ export class PastTrainingsComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.store.select(fromTraining.getFinishedExercises).subscribe((exercies: Exercise[]) => {
+      console.log('past-trainings component -> init -> select(getFinishedExercises)');
       this.dataSource.data = exercies;
     });
     this.trainingService.fetchCompletedOrCancelledExercises();

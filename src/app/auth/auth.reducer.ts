@@ -10,6 +10,7 @@ const initialState: State = {
 };
 
 export function authReducer(state = initialState, action: AuthActions) {
+    console.log('auth reducer -> action.type', action.type);
     switch (action.type) {
         case SET_AUTHENTICATED:
             return {
